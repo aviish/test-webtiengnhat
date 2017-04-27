@@ -1,70 +1,66 @@
-module.exports = function(listRoom, listUser, socket){
+module.exports = (listRoom, listUser, socket) => {
     var _ = require('lodash');
-
-    var dataResponse = {};
-
-    //chỉ số lượng người trong 1 phòng ví dụ phòng arr_room_type[0] = 5 nguười //phòng tự do
-    //arr_room_type[1] = 3 nguười //phòng bài 1 
-    //arr_room_type[50] = 3 nguười //phòng bài cuối cùng bài 50
-    var arr_room_type =[5,3,2,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3]; 
-    return function(data){
-         console.log('join');
+    var join_or_create = (data) => {
+        console.log('join');
         /**
          * data= {
-         *  username: 'hainguyen'
-         *  room_type: 1,
+         *  request_code: '334324',
          *  room_id: '42342342'
          * }
          */
-    }
+console.log('data', data);
+        var indexRoom = _.findIndex(listRoom, {
+            room_id: data.room_id
+        });
 
-    var indexRoom =  _.findIndex(listRoom, {
-        room_id: data.room_id
-    })
-    var indexUser = _.findIndex(listUser, {
-        socket: socket_id
-    })
+        var indexUser = _.findIndex(listUser, {
+            socket: socket.id
+        });
 
-    console.log("Join_Or_Create : " + listRoom );
+        console.log('[join_or_create]', indexRoom);
+        var dataResponse = {};
 
-    if(indexUser === -1 && ((indexRoom !== -1 && listRoom[indexRoom].listSocket.length < arr_room_type[data.room_type]) || (indexRoom === -1))){
-        dataResponse = true;
-        console.log("Create or Join successfull!");
-        socket.once('ready', () => {
+        if (indexUser === -1 && ((indexRoom !== -1 && listRoom[indexRoom].password == data.request_code && listRoom[indexRoom].listSocket.length < 5) || (indexRoom === -1)) ) {
+            console.log('Successfull!');
+            dataResponse.status = true;
+            socket.once('ready', () => {
                 socket.join(data.room_id);
                 socket.broadcast.to(data.room_id).emit('on_join', {
-                    socket: socket.id,
-                    username: data.username
+                    socket: socket.id
                 });
                 listUser.push({
-                    username: data.username,
                     socket: socket.id,
                     room_id: data.room_id
                 });
-
-                if (indexRoom !== -1) {
-                     listRoom[indexRoom].listSocket.push(socket.id)
-                }
-                
-                if(indexRoom === -1) {
-                    listRoom.push({
+                (indexRoom !== -1) && (listRoom[indexRoom].listSocket.push(socket.id));
+                (indexRoom === -1) && (listRoom.push({
                     room_id: data.room_id,
+                    password: data.request_code,
                     listSocket: [socket.id]
-                })
-                }
-                console.log(listRoom);
-                console.log(listUser);
+                }));
+                console.log('listRoom', listRoom);
+                console.log('listUser', listUser);
             });
-    } else {
-        console.log('Failed!');
-        dataResponse.status = false;
-        if (indexUser !== -1) {
-            dataResponse.error_code = 1001; // user already in some Room
-            console.log('User already in someRoom!');
-        } else if (indexRoom !== -1) {
-            dataResponse.error_code = 1002; // room full
-            console.log('Room full');
+
+        } else {
+            console.log('Failed!');
+            dataResponse.status = false;
+            if (indexUser !== -1) {
+                dataResponse.error_code = 1004; // user already in some Room
+                console.log('User already in someRoom!');
+            } else if (listRoom[indexRoom].listSocket.length >= 5) {
+                dataResponse.error_code = 1001; // room full
+                console.log('Room full');
+            } else if (indexRoom === -1) {
+                dataResponse.error_code = 1002;
+                console.log('Room is not open');
+            } else {
+                dataResponse.error_code = 1003; // wrong password
+                console.log('Wrong password!');
+            }
         }
+        socket.emit('on_result_join_or_create', dataResponse);
+
     }
-    socket.emit('on_result_join_or_create', dataResponse);
+    return join_or_create;
 }

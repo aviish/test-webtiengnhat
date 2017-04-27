@@ -49,7 +49,7 @@ appHttp.use(function (req, res) {
 
 var io = require('socket.io')(server);
 require('../sockets/chatroom')(io);
-require('../signaling_new/io')(io);
+require('../signaling/io')(io);
 
 /**
  * Normalize a port into a number, string, or false.
