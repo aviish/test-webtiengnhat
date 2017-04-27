@@ -1,0 +1,213 @@
+{% extends 'layout.njk' %}
+
+{% block body %}
+<div class="container">
+  <h1 class="page-header">Edit Profile</h1>
+  <div class="row">
+    <!-- left column -->
+    <form method="POST" action="/upload" id="avatar" enctype="multipart/form-data">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="text-center">
+          {% if user.picture %}
+          <img class="avatar-profile  img-thumbnail" alt="avatar" src="{{ user.picture }}">
+          {% else %}
+          <img class="avatar-profile  img-thumbnail" alt="avatar" src="/images/noavatar.gif">
+          {% endif %}
+          <h6>Upload a different photo...</h6>
+          <input type="file" class="text-center center-block well well-sm" name="avatar">
+          <button type="submit" class="btn btn-success">Update Avatar</button>
+        </div>
+      </div>
+    </form>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <div class="row"> 
+        {% if messages.success %}
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+            {% for success in messages.success %}
+            <div>{{ success.msg }}</div>
+            {% endfor %}
+          {% endif %}
+          {% if messages.error %}
+            {% for error in messages.error %}
+            <div>{ error.msg }</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="alert alert-success" role="alert" id="success_message">
+        Updated <i class="glyphicon glyphicon-thumbs-up"></i> <a class="panel-close close" data-dismiss="alert">×</a>
+      </div>
+      <h3>Thông tin cá nhân</h3>
+      <form class="form-horizontal" id="profile" role="form" method="POST" action="/account?_method=PUT">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="{{ user.name }}" type="text" name="name" id="name">
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value="{{ user.email}}" type="email" name="email" id="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Phone:</label>
+          <div class="col-md-8">
+            <input class="form-control" value="{{ user.phone}}" type="text" name="phone" id="phone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Gender</label>
+          <div class="col-md-8">
+            <input type="radio" name="gender" id="male" value="male" {% if user.gender == 'male' %}checked{% endif %}>
+            <label for="male">Male</label>
+            <input type="radio" name="gender" id="female" value="female" {% if user.gender == 'female' %}checked{% endif %}>
+            <label for="female">Female</label>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <label class="col-md-3 control-label">Location</label>
+          <div class="col-md-8">
+            <input class="form-control" value="{{ user.location}}" type="text" name="location" id="location">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <button class="btn btn-primary"  type="submit"> Save Changes </button>
+            <span></span>
+            <button class="btn btn-default" type="reset">Cancel</button>
+          </div>
+        </div>
+      </form>
+      <form class="form-horizontal" role="form" method="POST" action="/account?_method=PUT" data-toggle="validator">
+          <div class="form-group has-feedback">
+            <label for="userPw" class="col-md-3 control-label">
+              Mật khẩu mới
+                </label>
+            <div class="col-md-8">
+              <input class="form-control" id="userPw" type="password"
+                      name="password" data-minLength="6"
+                      data-error="Nhập tối thiểu 6 ký tự"
+                      required/>
+               <span class="glyphicon form-control-feedback"></span>
+               <span class="help-block with-errors"></span>
+            </div>
+               
+        </div>
+        <div class="form-group has-feedback">
+            <label for="userPw2" class="col-md-3 control-label">
+                  Nhập lại mật khẩu
+                </label>
+            <div class="col-md-8">
+              <input class="form-control" id="userPw2" type="password"
+                      name="confirm" data-match="#userPw"
+                      data-match-error="Chưa khớp mật khẩu"
+                      required/>
+              <span class="glyphicon form-control-feedback"></span>
+              <span class="help-block with-errors"></span>
+            </div>
+                
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <button class="btn btn-primary"  type="submit"> Save Password </button>
+            <span></span>
+            <button class="btn btn-default" type="reset">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <form method="POST" action="/account?_method=DELETE">
+      <p class="alert alert-warning">Delete Account! You can delete your account, but keep in mind this action is irreversible.</p>
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <p><small>Account Created:</small> {{ user.created_at | date("MMMM Do YYYY, h:mm a") }}<br>
+       <small>Account Updated:</small> {{ user.updated_at | date("MMMM Do YYYY, h:mm a") }}</p>
+</div>
+{% endblock %}
+{% block scripts %}
+
+<script type="text/javascript" src="/lib/bootstrapValidator.js"> </script>
+<script type="text/javascript" src="/lib/validator.min.js"> </script>
+<script type="text/javascript" >
+    $(document).ready(function() {
+    $('#profile').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                validators: {
+                        stringLength: {
+                        min: 3,
+                        max: 17,
+                    },
+                        notEmpty: {
+                        message: 'Please supply your name'
+                    }
+                }
+            },
+  
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your email address'
+                    },
+                    emailAddress: {
+                        message: 'Please supply a valid email address'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your phone number'
+                    },
+                    numeric: {
+                        message: 'The phone number must be a number'
+                        }
+                }
+            },
+            location: {
+                validators: {
+                     stringLength: {
+                        min: 8,
+                    },
+                    notEmpty: {
+                        message: 'Please supply your address'
+                    }
+                }
+            }
+            }
+        })
+        .on('success.form.bv', function(e) {
+            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#profile').data('bootstrapValidator').resetForm();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+                
+            }, 'json');
+        });
+        
+});
+</script>
+{% endblock %}

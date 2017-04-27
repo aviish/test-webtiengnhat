@@ -1,0 +1,64 @@
+{% extends 'layout.njk' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        {% if messages.error %}
+        <div class="alert alert-danger">
+          {% for error in messages.error %}
+          <div>{{ error.msg }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="login-wrap">
+            <h1 class="text-center login-title">Đăng ký tài khoản mới</h1>
+            <div class="account-wall">
+                <form method="POST" class="form-signin">
+                <label for="email">Email</label>
+                <input class="form-control" placeholder="Nhập email"  type="email" name="email" id="email" required autofocus>
+                <label for="name">Name</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Nhập tên" required minlength="8"  maxlength="20">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Nhập mật khẩu" required minlength="6">
+                <button class="btn  btn-info btn-block" type="submit">Đăng ký</button>
+                <label class="checkbox term">
+                    <input type="checkbox" value="term">
+                    I agree to the <a href="#">Terms of Service.</a>
+                </label>
+                </form>
+            </div>
+            
+            <p class="text-center">Already have an account? <a href="/login">Log in</a> <span><strong>or</strong> sign up with</span></p>
+
+            <div class="container-fluid text-center">
+                <div class="sicon">
+                    <div class="col-md-1"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+                        <div class="icon-circle">
+                            <a href="/auth/facebook" class="ifacebook" title="Facebook"><i class="fa fa-facebook"></i></a>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+                        <div class="icon-circle">
+                            <a href="/auth/twitter" class="itwittter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+                        <div class="icon-circle">
+                            <a href="/auth/google" class="igoogle" title="Google+"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hội thoại tự</title>
+	<meta charset="utf8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+	<link rel="icon" type="image/png" href="/images/logo.png">
+	<link rel="stylesheet" href="/lib/datatables/Bootstrap-3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/conference.css">
+	<script src="/lib/jquery/jquery-3.2.0.min.js"></script>
+	<script src="/lib/datatables/Bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+</head>
+<body onresize="resize()">
+	<div class="wrapper">
+		<div id="createPage">
+			<div class="createPageContent">
+				<h1 class="text-center titleroom">Tạo phòng hội thoại lên tới 6 người</h1>
+				<div>
+					<label for="roomName">Tên phòng:</label>
+					<input type="text" id="roomName"  value="{{ room }}" autofocus  />
+				</div>
+				<div>
+					<label></label>
+					<input type="checkbox" id="passwordCheckBox" style="min-width: 0;"><label for="passwordCheckBox">Tạo phòng có mật khẩu</label>
+				</div>
+				<div id="passwordDiv" style="display: none;">
+					<label>Mật khẩu:</label>
+					<input type="password" id="passwordInput">
+				</div>
+				<div class="form-group wrap_btn_start">
+					<button id="startBtn" type="submit" value="Submit" class="btnStart btn btn-pryma">Tạo phòng</button>
+				</div>
+			</div>
+		</div>
+		<div id="videoPage">
+			<div id="buttonArea" class="col-xs-12 top_menu ">
+				<button id="logo" class="transparent" disabled>
+					<img style="height: 40px; width: 40px; margin-bottom: 5px;" src="/images/logo.png">
+				</button>
+				<input type="text" id="locationLink" readonly>
+				<button id="copyBtn">Copy</button>
+				<div class="btn_icon">
+					<button id="audioMuteBtn" value="on" class="transparent">
+						<img id="audioImg" class="icon" src="/images/mic-on.png">
+					</button>
+					<button id="videoMuteBtn" value="on" class="transparent">
+						<img id="videoImg" class="icon" src="/images/cam-on.png">
+					</button>
+					<button id="endBtn" class="transparent">
+						<img class="icon" src="/images/end.png">
+					</button>
+				</div>
+
+				<div id="copyNotify">
+					Link has been copied to clipboard
+				</div>
+				<img id="snapshot" class="hidden">
+				<canvas class="hidden"></canvas>
+			</div>
+
+			<div class="col-xs-12 content">
+				<div id="mainArea" class="col-xs-9 col-sm-7">
+					<div id="divLocal" class="mainDiv">
+						<video class="mainVideo" id="videoLocal" autoplay></video>
+						<img class="videoImg mainImg hidden" id="viImgLocal" src="/images/no-video.png">
+						<img class="micIcon mainIcon hidden" id="micIconLocal" src="/images/main-mic-off.png">
+					</div>
+				</div>
+
+				<div id="subArea" class="col-xs-3 col-sm-2">
+
+				</div>
+
+				<div id="chatArea" class="col-xs-12 col-sm-3">
+					<div id="textArea" class="box">
+						<div class="space"></div>
+					</div>
+					<div class="wrap-message-btn">
+						<input type="text" id="messageInput" placeholder="Write something" />
+						<div class="input">
+							<i id="attachFile" class="glyphicon glyphicon-paperclip"></i>
+							<i id="sendBtn" class="glyphicon glyphicon-send"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<input type="file" id="get" class="hidden">
+	<script src="/lib/lodash/lodash.min.js"></script>
+	<script src="/lib/conference/handleFile.js"></script>
+	<script src="/lib/conference/handleback.js"></script>
+	<script src="/lib/conference/download.js"></script>
+	<script src="/lib/conference/adapter.js"></script>
+	<script src="/lib/conference/copy.js"></script>
+	<script src="/js/config.js"></script>
+	<script src="/js/conference.js"></script>
+</body>
+</html>

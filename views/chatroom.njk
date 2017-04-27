@@ -1,0 +1,70 @@
+{% extends 'home.njk' %}
+
+{% block home %}
+
+<div id="wrapper">
+    <!-- <div class="block"></div> -->
+    <div class="col-sm-4" id="left">
+      <div id="title">Users Online</div>
+      <div id="danhsachUsersOnline"></div>
+    </div>
+    <div class="col-sm-8" id="right">
+      <div id="dsMsg"></div>
+      <!-- <div class="block"></div> -->
+      <div class="input-group col-sm-12 col-md-8 col-md-offset-2">
+        <input type="text" class="form-control" id="txtMessage" placeholder="Message..." />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-primary" id="btnChat">
+            <i class="glyphicon glyphicon-send"></i> Send</button>
+        </span>
+      </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io('/chatroom');
+    var username = '{% if user.name %}{{user.name}}{% elif user.email %}{{user.email}}{% else %}{{ user.id }}{% endif %}';
+
+    socket.emit("join", username);
+
+    socket.on("join_success", function(users){
+      $('#danhsachUsersOnline').empty();
+      users.forEach(function(user) {
+        var s = "<div data-id='"+user.id+"' class='motUser'>" + user.username + "</div>";
+        $("#danhsachUsersOnline").append(s);
+      });
+    });
+    
+    socket.on("server_send_message", function(data){
+      var hoten = "<span class='hoten'>" + data.username+"</span>";
+      var message = "<span>"+data.mgs+"</span>"
+      var s2 = "<div>" +hoten+":"+message+"</div>";
+      $("#dsMsg").append(s2);
+      $("#dsMsg").scrollTop($("#dsMsg")[0].scrollHeight);
+    });
+
+    socket.on("remove_user", function(socket_id) {
+      $('div[data-id="' + socket_id + '"').remove();
+    });
+
+    $(document).ready(function(){
+      $('#txtMessage').on('keyup', function(e) {
+        e.preventDefault();
+        if (e.keyCode == 13) {
+          $('#btnChat').click();
+        }
+      });
+
+      $("#btnChat").click(function(){
+        if(!$("#txtMessage").val() == "") {
+          socket.emit("client_send_message", $("#txtMessage").val());
+          $("#txtMessage").val("");
+        }  
+      });
+    });
+</script>
+{% endblock %}

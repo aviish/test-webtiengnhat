@@ -1,0 +1,66 @@
+{% extends 'layout.njk' %}
+
+{% block body %}
+<div class="container" id="login-page">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        {% if messages.error %}
+        <div class="alert alert-danger">
+          {% for error in messages.error %}
+          <div>{{ error.msg }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+        <div class="login-wrap">
+            <h1 class="text-center login-title">Đăng nhập vào hệ thống</h1>
+            <div class="account-wall">
+                <img class="profile-img" src="/images/logo.png"
+                    alt="Avatar">
+                <form method="POST" class="form-signin">
+                <input class="form-control" placeholder="Nhập email"  type="email" name="email" id="email" required autofocus>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                <button class="btn  btn-primary btn-block" type="submit">Đăng nhập</button>
+                <label class="checkbox pull-left remember">
+                    <input type="checkbox"  name="remember" id="remamber" value="remember">
+                    Remember me
+                </label>
+                <a href="/contact" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                <p><a href="/forgot">Forgot your password?</a></p>
+                
+                </form>
+            </div>
+            
+            <p class="text-center">Create an new account? <a href="/signup">Sign up</a> <span><strong>or</strong> login with</span></p>
+
+            <div class="center-block">
+                <div class="container-fluid center-block">
+                    <div class="sicon">
+                        <div class="col-lg-1 col-md-1"></div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+                            <div class="icon-circle">
+                                <a href="/auth/facebook" class="ifacebook" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            </div>
+                        </div>
+                
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+                            <div class="icon-circle">
+                                <a href="/auth/twitter" class="itwittter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            </div>
+                        </div>
+                
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+                            <div class="icon-circle">
+                                <a href="/auth/google" class="igoogle" title="Google+"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

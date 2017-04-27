@@ -1,0 +1,112 @@
+{% extends 'layout.njk' %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-5  toppad  pull-right ">
+			<p class=" text-info"> Tham gia: {{ user.created_at | date("MMMM Do YYYY, h:mm a") }} </p>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{info.name}}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+            {% if info.picture %}
+            <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="{{ info.picture }}" class="img-circle img-responsive"> </div>
+            {% else %}
+            <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/images/noavatar.gif" class="img-circle img-responsive"> </div>
+            {% endif %}
+						
+	
+						<div class=" col-md-9 col-lg-9 ">
+							<table class="table table-user-information">
+								<tbody>
+									<tr>
+										<td>Email:</td>
+										<td>{{ info.email }}</td>
+									</tr>
+									<tr>
+										<td>Level:</td>
+										<td>{{ info.level }}</td>
+									</tr>
+	
+									<tr>
+										<td>Giới tính</td>
+										<td>{% if info.gender =="male"%} Nam {% elseif info.gender =="female" %} Nu {% else %} {{ info.gender }}{% endif %}</td>
+									</tr>
+									<tr>
+										<td>Địa chỉ</td>
+										<td>{{ info.location }}</td>
+									</tr>
+								</tbody>
+							</table>
+              <h3>Mạng xã hội</h3>
+              {% if info.google %}
+              {% endif %}
+              {% if info.google %}
+              <a href="https://plus.google.com/u/0/{{info.google}}" class="btn btn-social btn-twitter">  <span class="fa fa-google"></span> Goole</a>
+              {% endif %}
+							{% if info.facebook %}
+              <a href="https://www.facebook.com/profile.php?id={{info.facebook}}" class="btn  btn-social btn-facebook"><span class="fa fa-facebook"></span>Facebook</a>
+              {% endif %}
+              {% if info.twitter %}
+              <a href="#" class="btn btn-twitter"><span class="fa fa-twitter"></span>Twitter</a>
+              {% endif %}
+							
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<a data-original-title=" Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+					{% if user.role %}
+          <span class="pull-right">
+					<a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+					<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+					</span>
+          {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    var panels = $('.user-infos');
+    var panelsButton = $('.dropdown-user');
+    panels.hide();
+
+    //Click dropdown
+    panelsButton.click(function() {
+        //get data-for attribute
+        var dataFor = $(this).attr('data-for');
+        var idFor = $(dataFor);
+
+        //current button
+        var currentButton = $(this);
+        idFor.slideToggle(400, function() {
+            //Completed slidetoggle
+            if(idFor.is(':visible'))
+            {
+                currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
+            }
+            else
+            {
+                currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
+            }
+        })
+    });
+
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('button').click(function(e) {
+        e.preventDefault();
+        alert("This is a demo.\n :-)");
+    });
+});
+</script>
+{% endblock %}

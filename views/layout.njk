@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+	<head>
+		<meta charset="utf8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+		<title> {{title}} - Tự học tiếng Nhật với mọi người</title>
+		<link rel="icon" type="image/png" href="/images/logo.png">
+		<link rel="stylesheet" href="/lib/datatables/Bootstrap-3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+		{% block style %}{% endblock %}
+		<link rel='stylesheet' href='/css/main.css' />
+	</head>
+	
+	<body>
+				{% include "partials/header.njk" %}
+			  {% block body %}{% endblock %}
+	</body>
+
+	<script src="/lib/jquery/jquery-3.2.0.min.js"></script>
+	<script src="/lib/datatables/Bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  {% block scripts %}{% endblock %}
+  <script src="/js/main.js"></script>
+</html>

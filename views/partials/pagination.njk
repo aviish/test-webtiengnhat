@@ -1,0 +1,19 @@
+<div class="grid">
+    <div class="col-1-1">
+        <div class="paginate">
+                <ul>
+                {%  if (paginate.hasPreiousPages) {  %}
+                    <li>
+                        <a href="{{ paginate.href().prev  }}">Previous</a>
+                    </li>
+                {%  }  %}
+
+                {% if (paginate.hasNextPages) {  %}
+                    <li>
+                        <a href="{{ paginate.href().next  }}">Next</a>
+                    </li>
+                {% }  %}
+                </ul>
+        </div>
+    </div>
+</div>

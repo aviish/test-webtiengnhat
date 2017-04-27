@@ -1,0 +1,96 @@
+{% extends 'layout.njk' %}
+
+{% block style %}
+<link rel="stylesheet" href="/lib/datatables/datatables.min.css">
+{% endblock %}
+
+{% block body %}
+
+<div>
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="table-responsive">
+      <table class="table table-hover display" id="userTable"  cellspacing="0" width="100%">
+        <thead>
+          <th></th>
+          <th>Thông tin tài khoản</th>
+          <th>Địa chỉ</th>
+          <th class="col-md-2"></th>
+          <th class="col-md-2"></th>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/lib/datatables/datatables.min.js"></script>
+<script>
+  function formatData(string) {
+    string = string.replace(/&quot;/g, '"');
+    var users = JSON.parse(string);
+    users.forEach(function(user) {
+      user['messageBtn'] = '<a class="btn btn-primary" href="#">Gửi tin nhắn</a>';
+      user['profileBtn'] = '<a class="btn btn-info" target="_blank" href="/user/'+user['id']+'/info">Trang cá nhân</a>';
+    });
+    return users;  
+  }
+
+  function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table class="table table-hover">'+
+        '<tr>'+
+            '<td class="col-sm-4">Level:</td>'+
+            '<td class="col-sm-8"> '+d.level+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td class="col-sm-4">Name:</td>'+
+            '<td class="col-sm-8"> '+d.name+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td class="col-sm-4">Phone:</td>'+
+            '<td class="col-sm-8"> '+d.phone+'</td>'+
+        '</tr>'+
+
+    '</table>';
+  }
+
+  var table = $('#userTable').DataTable({
+    data: formatData('{{users}}'),
+    columns: [
+      { 
+        className: 'details-control',
+        orderable: false,
+        data: 'null',
+        defaultContent: ''
+      },
+      { data: 'email' },
+      { data: 'location' },
+      { data: 'messageBtn', orderable: false, searchable: false },
+      { data: 'profileBtn', orderable: false, searchable: false }
+    ],
+    autoWidth: false,
+    order: [[1, 'asc']]
+  });
+
+  $('#userTable tbody').on('click', 'td.details-control', function () {
+    var tr = $(this).closest('tr');
+    var that = $(this);
+    var row = table.row( tr );
+
+    if ( row.child.isShown() ) {
+      // This row is already open - close it
+      row.child.hide();
+      tr.removeClass('shown');
+    }
+    else {
+      // Open this row
+      row.child( format(row.data()) ).show();
+      tr.addClass('shown');
+    }
+  });
+</script>
+{% endblock %}

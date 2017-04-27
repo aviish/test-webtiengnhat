@@ -1,0 +1,58 @@
+{% extends 'home.njk' %}
+
+{% block home %}
+
+<div class="list-group " id="list-room">
+  <div class="panel-group">
+
+  <!-- room -->
+  <div class="panel panel-default dsvideoroom">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">Bài 1</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+    <button type="button" class="btn btn-success btntaophong">Tạo Phòng</button>
+      <ul class="list-group ">
+        <a href="#" class="list-group-item">Phong 1</a>
+        <a href="#" class="list-group-item">Phong 2</a>
+        <a href="#" class="list-group-item">Phong 3</a>
+        <a href="#" class="list-group-item">Phong 4</a>
+      </ul>
+    </div>
+  </div>
+  <!-- endroom -->
+
+  <!-- room -->
+  <div class="panel panel-default dsvideoroom">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse2">Bài 2</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+    <button type="button" class="btn btn-success btntaophong">Tạo Phòng</button>
+      <ul class="list-group ">
+        <a href="#" class="list-group-item">Phong 1</a>
+        <a href="#" class="list-group-item">Phong 2</a>
+        <a href="#" class="list-group-item">Phong 3</a>
+        <a href="#" class="list-group-item">Phong 4</a>
+      </ul>
+    </div>
+  </div>
+  <!-- endroom -->
+  
+ </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+  $(function() {
+    $('.btntaophong').on('click', function() {
+      window.location.href = '/videoroom/r';
+    });
+  });
+</script>
+{% endblock %}

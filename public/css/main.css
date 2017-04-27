@@ -1,0 +1,414 @@
+/****************************
+        Global Config
+****************************/
+@charset "UTF-8";
+
+/*
+body {
+  background: url('/images/background-login.jpg');
+  background-size: 452px;
+}
+*/
+a {
+  text-decoration: none;
+}
+
+h1{
+  text-align: center;
+}
+
+textarea {
+  resize: vertical;
+}
+
+footer{
+    text-align: center !important;
+    border: 1px solid gray !important;
+    background-color: #3E4855 !important;
+}
+
+/****************************
+        Home Navbar
+****************************/
+.left-right-bar{
+    background-color: #3E4855 !important;
+    height: 660px;
+}
+#menu-bar{
+    background-color: #3E4855 !important;
+}
+
+#menu-bar li {
+  vertical-align: middle;
+}
+#menu-bar li:hover {
+  background-color: #eee;
+}
+
+#menu-bar li a {
+  color: #D98D4A;
+}
+
+/****************************
+        Login Form
+****************************/
+.login-wrap {
+  width: 400px;
+  margin: auto;
+}
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.remember{
+  margin-left: 20px;
+}
+.term{
+  margin-left: 20px;
+}
+.form-signin .checkbox{
+    font-weight: normal;
+}
+.form-signin .form-control{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus{
+    z-index: 2;
+}
+.form-signin input[type="text"]{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall{
+    margin-top: 20px;
+    padding: 20px 0px 10px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help{
+    margin-top: 10px;
+}
+.new-account{
+    display: block;
+    margin-top: 10px;
+}
+/* end login form*/
+
+/****************************
+            Header
+****************************/
+header{
+    padding-right: 0px; 
+    padding-bottom: 55px  !important; 
+}
+#header-right{
+    margin-right: 9px !important;
+}
+.avatar{
+  max-height: 41px;
+  max-width: 52px;
+  margin-top: 7px;
+}
+/* end header*/
+
+
+/****************************
+        Show User
+****************************/
+.imageinfo{
+  width: 200px !important;
+  margin-left:23px !important;  
+}
+#distance {
+  margin-top: 7px !important;
+}
+/* end -show-user */
+
+
+/****************************
+        Chat Room
+****************************/
+#wrapper{
+  margin: auto
+}
+
+#left, #right{
+  min-height: 500px; 
+  margin-top: 10px
+}
+#left{
+  background:#eaf4b7;
+}
+#right{
+  background-color: #d6f9d9;
+}
+
+.block{
+  width: 100%; 
+  clear: both;
+}
+
+#txtMessage, #btnChat{
+  float: left; 
+  margin: 2px;
+}
+
+#title{
+  background-color: #ccf900;
+  text-align: center;
+  padding: 5px;
+  margin: 0 -15px;
+}
+
+.hoten{
+  color: #E31617; font-weight: bold
+}
+
+#dsMsg{
+  height: 450px;
+  overflow:auto; clear: both
+}
+
+#danhsachUsersOnline{
+  height: 450px;
+  overflow:auto; 
+  clear: both
+}
+
+.motUser{
+  margin-left: 3px;
+}
+/* end chatroom */
+
+/****************************
+        Contact
+****************************/
+#message{
+    height: 130px;
+}
+#success_message{ display: none;}
+/*end contact*/
+
+/****************************
+        Profile
+****************************/
+.avatar-profile{
+    max-height: 300px;
+    max-width: 302px;
+}
+/*End Profile*/
+
+
+/****************************
+        Social Button
+****************************/
+
+.icon-circle .fa{
+    font-size: 25px;
+    color: #e84700;
+    margin: 0 auto;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #e84700;
+    line-height: 48px;
+    cursor: pointer;
+    -webkit-transition  : all  ease-in-out 0.35s;
+    -moz-transition     : all  ease-in-out 0.35s;
+    -o-transition       : all  ease-in-out 0.35s;
+    -ms-transition      : all  ease-in-out 0.35s;
+    transition          : all  ease-in-out 0.20s,background-color ease-in-out 0.05s;
+}
+
+.icon-circle  .fa:hover{
+    
+    background-color        : #e84700;    
+    color                   : #fff;
+    border                  : 1px solid #e84711;
+    -moz-box-shadow         : inset 0px 0px 0px 5px #ffffff;
+    -o-box-shadow           : inset 0px 0px 0px 5px #ffffff;
+    -ms-box-shadow          : inset 0px 0px 0px 5px #ffffff;
+    -webkit-box-shadow      : inset 0px 0px 0px 5px #ffffff;
+    box-shadow              : inset 0px 0px 0px 5px #ffffff;
+    -ms-transform           : scale(1.2,1.2); 
+    -webkit-transform       : scale(1.2,1.2);
+    -moz-transform          : scale(1.2,1.2); 
+    -o-transform            : scale(1.2,1.2); 
+    transform               : scale(1.2,1.2);  
+}
+
+.icon-circle  i:before{
+    margin-left         : 0px;
+    font-size           : 20px;
+}
+
+@media (min-width:320px) and (max-width:768px) {
+
+
+ .icon-circle .fa{
+    font-size           : 15px;
+    color               : #e84700;
+    margin              : 0 auto;
+    height              : 40px;
+    width               : 40px;
+    border-radius       : 50%;
+    border              :2px solid #e84700;
+    line-height         : 40px;
+    cursor              : pointer;
+    -webkit-transition  : all  ease-in-out 0.35s;
+    -moz-transition     : all  ease-in-out 0.35s;
+    -o-transition       : all  ease-in-out 0.35s;
+    -ms-transition      : all  ease-in-out 0.35s;
+    transition          : all  ease-in-out 0.20s,background-color ease-in-out 0.05s;
+}
+
+.icon-circle  .fa:hover{
+    
+    background-color        : #e84700;    
+    color                   : #fff;
+    border                  : 1px solid #e84711;
+    -moz-box-shadow         : inset 0px 0px 0px 5px #ffffff;
+    -o-box-shadow           : inset 0px 0px 0px 5px #ffffff;
+    -ms-box-shadow          : inset 0px 0px 0px 5px #ffffff;
+    -webkit-box-shadow      : inset 0px 0px 0px 5px #ffffff;
+    box-shadow              : inset 0px 0px 0px 5px #ffffff;
+    -ms-transform           : scale(1.2,1.2); 
+    -webkit-transform       : scale(1.2,1.2);
+    -moz-transform          : scale(1.2,1.2); 
+    -o-transform            : scale(1.2,1.2); 
+    transform               : scale(1.2,1.2);  
+}
+
+.icon-circle  i:before{
+    margin-left         : 0px;
+    font-size           : 20px;
+}   
+}
+
+.ifacebook .fa{
+    color               :#3B5998;
+    border              :2px solid #3B5998;
+}
+
+.ifacebook .fa:hover{
+    
+    background-color        : #3B5998;    
+    color                   : #fff;
+    border                  : 1px solid #3B5998;
+
+}
+
+.itwittter .fa{
+    color               : #33ccff;
+    border              :2px solid #33ccff;
+}
+
+.itwittter .fa:hover{
+    
+    background-color        : #33ccff;    
+    color                   : #fff;
+    border                  : 1px solid #33ccff;
+
+}
+
+.igoogle .fa{
+    color               : #BD3518;
+    border              :2px solid #BD3518;
+}
+
+.igoogle .fa:hover{
+    
+    background-color        : #BD3518;    
+    color                   : #fff;
+    border                  : 1px solid #BD3518;
+
+}
+
+/* end social button*/
+
+
+/****************************		
+         Datatables		
+ ****************************/		
+ td.details-control {
+    background: url('../images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../images/details_close.png') no-repeat center center;
+}
+/* end datatables */
+
+/****************************
+        Show Users
+****************************/
+.user-row {
+    margin-bottom: 14px;
+}
+
+.user-row:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+.toppad
+{margin-top:20px;
+}
+/*End show users*/

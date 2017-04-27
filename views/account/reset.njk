@@ -1,0 +1,62 @@
+{% extends 'layout.njk' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <div class="panel-body">
+                               <form class="form-horizontal" role="form" method="POST" data-toggle="validator">
+                                  <div class="form-group has-feedback">
+                                    <label for="userPw" class="col-md-3 control-label">
+                                      Mật khẩu mới
+                                        </label>
+                                    <div class="col-md-8">
+                                      <input class="form-control" id="userPw" type="password"
+                                              name="password" data-minLength="6"
+                                              data-error="Nhập tối thiểu 6 ký tự"
+                                              required/>
+                                      <span class="glyphicon form-control-feedback"></span>
+                                      <span class="help-block with-errors"></span>
+                                    </div>
+                                      
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <label for="userPw2" class="col-md-3 control-label">
+                                          Nhập lại mật khẩu
+                                        </label>
+                                    <div class="col-md-8">
+                                      <input class="form-control" id="userPw2" type="password"
+                                              name="confirm" data-match="#userPw"
+                                              data-match-error="Chưa khớp mật khẩu"
+                                              required/>
+                                      <span class="glyphicon form-control-feedback"></span>
+                                      <span class="help-block with-errors"></span>
+                                    </div>
+                                        
+                                </div>
+                                <div class="form-group">
+                                  <label class="col-md-3 control-label"></label>
+                                  <div class="col-md-8">
+                                    <button class="btn btn-primary"  type="submit"> Change Password </button>
+                                    <span></span>
+                                    <button class="btn btn-default" type="reset">Cancel</button>
+                                  </div>
+                                </div>
+                              </form>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="/lib/validator.min.js"> </script>
+{% endblock %}
